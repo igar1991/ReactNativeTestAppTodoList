@@ -1,19 +1,42 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, ScrollView, FlatList, SafeAreaView } from 'react-native';
+import { Header } from './src/Header';
+import { AddTodo } from './src/AddTodo';
+import { TodoList } from './src/TodoList';
+
 
 export default function App() {
+
+  const [todo, setTodo] = useState([]);
+
+  //Добавление в масси дела
+  const addUse = (title) => {
+    setTodo((prev)=> [...prev,{
+      id: Date.now().toString(),
+      title
+    }])
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={{color: "white"}}>Аrrrrrf</Text>
+    <View>
+      <Header title = "Todo App" />
+        <View  style={styles.container}>
+          <AddTodo todo = {todo} addUse= {addUse} />
+          <ScrollView>
+          <FlatList
+            data = {todo}
+            renderItem={( ({ item }) => <TodoList title={item.title} /> )}
+            keyExtractor={item => item.id}
+            />
+            </ScrollView>
+
+        </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'purple',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    padding: 10
+  }
 });

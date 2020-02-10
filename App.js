@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { Header } from './src/components/Header';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
@@ -24,8 +24,24 @@ export default function App() {
   }
 
   const onRemoove = (id)=> {
-    setNewtodo(null)
-    setTodo(prev => prev.filter(t => t.id!==id))
+    const todoRemoove = todo.find(t=>t.id==id)
+    Alert.alert(
+      'Удаление дела',
+      `Вы действительно хотите удалить дело ${todoRemoove.title}?`,
+      [
+        {
+          text: 'Отмена',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => {
+          setNewtodo(null)
+          setTodo(prev => prev.filter(t => t.id!==id))
+        }},
+      ],
+      {cancelable: false},
+    );
+    
   }
 
   let content = ( <MainScreen todo = { todo } addUse = { addUse } idSubmit = { idSubmit } /> )

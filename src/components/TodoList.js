@@ -1,9 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, Button, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
-export const TodoList = ({ title }) => {
+export const TodoList = ({ item, idSubmit }) => {
     return (
-    <TouchableOpacity><Text style={styles.text}>{title}</Text></TouchableOpacity>
+    <TouchableOpacity
+    onPress = {()=> idSubmit(item)}
+    >
+        <Text style={styles.text}>{item.title}</Text>
+        </TouchableOpacity>
     )
 }
 

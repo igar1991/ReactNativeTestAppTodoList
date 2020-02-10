@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, TextInput, Button, View, Alert } from 'react-native';
 
-export const AddTodo = ({addUse, todo}) => {
+export const AddTodo = ({addUse}) => {
     
     const [el, setEl] = useState('')
 

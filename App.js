@@ -22,7 +22,8 @@ export default function App() {
   const idSubmit = (item)=> {
     setNewtodo(item)
   }
-
+   
+  //Удаление элемента
   const onRemoove = (id)=> {
     const todoRemoove = todo.find(t=>t.id==id)
     Alert.alert(
@@ -43,11 +44,21 @@ export default function App() {
     );
     
   }
+  
+  //Изменение элементов
+  const changeTodo = (id, newTitle) => {
+    setTodo(prev => prev.map(item => {
+      if (item.id === id) {
+        item.title = newTitle
+      }
+      return item;
+    }) )
+  }
 
   let content = ( <MainScreen todo = { todo } addUse = { addUse } idSubmit = { idSubmit } /> )
 
   if ( newtodo ) {
-    content = (<TodoScreen idSubmit={idSubmit} ntodo={newtodo} onRemoove = {onRemoove} />)
+    content = (<TodoScreen idSubmit={idSubmit} ntodo={newtodo} onRemoove = {onRemoove} changeTodo = {changeTodo} />)
   }
 
   

@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, Button, View } from 'react-native';
 import { THEME } from '../theme';
 import { AppCard } from '../components/UI/AppCard';
+import { AddModal } from '../components/UI/AddModal';
 
-export const TodoScreen = ({idSubmit, ntodo, onRemoove}) => {
+export const TodoScreen = ({ idSubmit, ntodo, onRemoove, changeTodo }) => {
+
+    const [ modal, setModal ] = useState(false);
+
+    const onSaveTodo =(title)=> {
+        changeTodo( ntodo.id, title )
+        setModal(false)
+    }
+
     return (
         <View>
+            <AddModal visible = {modal} Cancel = {()=>setModal(false)}  value = {ntodo.title} onSaveTodo = {onSaveTodo} />
             <AppCard>
         <Text style={styles.text}>{ntodo.title}</Text>
-        <Button title = "Ред"/>
+        <Button title = "Ред" onPress={ ()=> setModal(true) }/>
             </AppCard>
             
         <View style = {styles.container}>

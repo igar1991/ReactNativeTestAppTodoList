@@ -13,6 +13,7 @@ export const TodoList = ({ item, idSubmit }) => {
 
 const styles = StyleSheet.create({
     text: {
+        fontFamily: 'roboto-regular',
         fontSize: 20,
         borderColor: '#8fbc8f',
         borderWidth: 1,

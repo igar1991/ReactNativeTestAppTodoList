@@ -56,7 +56,7 @@ export const MainLayout = ()=> {
     }) )
   }
 
-  let content = ( <MainScreen todo = { todoContext.todos } addUse = { addUse } idSubmit = { idSubmit } /> )
+  let content = ( <MainScreen todo = { todo } addUse = { addUse } idSubmit = { idSubmit } /> )
 
   if ( newtodo ) {
     content = (<TodoScreen idSubmit={idSubmit} ntodo={newtodo} onRemoove = {onRemoove} changeTodo = {changeTodo} />)

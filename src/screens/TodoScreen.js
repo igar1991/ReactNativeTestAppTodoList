@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, Button, View } from 'react-native';
 import { THEME } from '../theme';
 import { AppCard } from '../components/UI/AppCard';
 import { AddModal } from '../components/UI/AddModal';
 import { AppButton } from '../components/UI/AppButton';
 import { AntDesign } from '@expo/vector-icons';
+import { TodoContext } from '../context/todoContext';
+import { ScreenContext } from '../context/screen/screenContext';
 
-export const TodoScreen = ({ idSubmit, ntodo, onRemoove, changeTodo }) => {
+export const TodoScreen = () => {
+
+    const { removeTodo, updateTodo } = useContext(TodoContext)
+    const { changeScreen, todoId } = useContext(ScreenContext)
 
     const [ modal, setModal ] = useState(false);
 
     const onSaveTodo =(title)=> {
-        changeTodo( ntodo.id, title )
+        updateTodo( todoId.id, title )
         setModal(false)
     }
 
     return (
         <View>
-            <AddModal visible = {modal} Cancel = {()=>setModal(false)}  value = {ntodo.title} onSaveTodo = {onSaveTodo} />
+            <AddModal visible = {modal} Cancel = {()=>setModal(false)}  value = {todoId.title} onSaveTodo = {onSaveTodo} />
             <AppCard>
-        <Text style={styles.text}>{ntodo.title}</Text>
+        <Text style={styles.text}>{todoId.title}</Text>
         <AppButton color='blue' onPress={ ()=> setModal(true) }>
             <AntDesign name = 'pluscircleo' />
         </AppButton>
@@ -27,10 +32,10 @@ export const TodoScreen = ({ idSubmit, ntodo, onRemoove, changeTodo }) => {
             
         <View style = {styles.container}>
             <View style = {styles.buttons}>
-                <AppButton color = "gray" onPress = {()=>idSubmit(null)}>Назад</AppButton>
+                <AppButton color = "gray" onPress = {()=>changeScreen(null)}>Назад</AppButton>
             </View>
             <View style = {styles.buttons}>
-                <Button title = "Удалить" color = {THEME.RED_COLOR} onPress = {() => onRemoove(ntodo.id)}/>
+                <Button title = "Удалить" color = {THEME.RED_COLOR} onPress = {() => removeTodo(todoId.id)}/>
             </View>    
         </View>
         </View>

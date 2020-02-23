@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Button, View, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text,TouchableOpacity } from 'react-native';
 
 export const TodoList = ({ item, idSubmit }) => {
     return (

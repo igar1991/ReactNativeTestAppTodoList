@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, TextInput, Button, View, Alert, Keyboard } from 'react-native';
+import { StyleSheet, TextInput, View, Alert, Keyboard } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 export const AddTodo = ({addUse}) => {

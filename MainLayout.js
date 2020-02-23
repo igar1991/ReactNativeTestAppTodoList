@@ -4,11 +4,13 @@ import { Header } from './src/components/Header';
 import { MainScreen } from './src/screens/MainScreen';
 import { TodoScreen } from './src/screens/TodoScreen';
 import { TodoContext } from './src/context/todoContext';
+import { ScreenContext } from './src/context/screen/screenContext';
 
 
 
 export const MainLayout = ()=> {
     const todoContext = useContext(TodoContext)
+    const screenContext = useContext(ScreenContext)
     const [todo, setTodo] = useState([]);
     const [newtodo, setNewtodo] = useState(null);
 
@@ -56,10 +58,10 @@ export const MainLayout = ()=> {
     }) )
   }
 
-  let content = ( <MainScreen todo = { todo } addUse = { addUse } idSubmit = { idSubmit } /> )
+  let content = ( <MainScreen todo = { todoContext.todos } addUse = { todoContext.addTodo } idSubmit = { screenContext.changeScreen } /> )
 
-  if ( newtodo ) {
-    content = (<TodoScreen idSubmit={idSubmit} ntodo={newtodo} onRemoove = {onRemoove} changeTodo = {changeTodo} />)
+  if ( screenContext.todoId ) {
+    content = (<TodoScreen idSubmit={screenContext.changeScreen} ntodo={screenContext.todoId} onRemoove = {todoContext.removeTodo} changeTodo = {todoContext.updateTodo} />)
   }
 
 
